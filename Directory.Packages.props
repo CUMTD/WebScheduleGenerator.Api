@@ -1,28 +1,29 @@
 <Project>
-	<PropertyGroup>
-		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-	</PropertyGroup>
-	<ItemGroup>
-		<PackageVersion Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.3.0" />
-		<PackageVersion Include="Azure.Identity" Version="1.10.4" />
-		<PackageVersion Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
-		<PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.0" />
-		<PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
-		<PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
-		<PackageVersion Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="8.0.0" />
-		<PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
-		<PackageVersion Include="Microsoft.OpenApi" Version="1.6.11" />
-		<PackageVersion Include="Serilog" Version="3.1.1" />
-		<PackageVersion Include="Serilog.AspNetCore" Version="8.0.0" />
-		<PackageVersion Include="Serilog.Enrichers.AssemblyName" Version="1.0.9" />
-		<PackageVersion Include="Serilog.Enrichers.Context" Version="4.6.5" />
-		<PackageVersion Include="Serilog.Enrichers.Environment" Version="2.3.0" />
-		<PackageVersion Include="Serilog.Enrichers.Process" Version="2.0.2" />
-		<PackageVersion Include="Serilog.Enrichers.Thread" Version="3.1.0" />
-		<PackageVersion Include="Serilog.Sinks.Console" Version="5.0.1" />
-		<PackageVersion Include="Serilog.Sinks.Seq" Version="6.0.0" />
-		<PackageVersion Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-		<PackageVersion Include="Swashbuckle.AspNetCore.Annotations" Version="6.5.0" />
-		<PackageVersion Include="Swashbuckle.AspNetCore.Filters" Version="7.0.12" />
-	</ItemGroup>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.3.0" />
+    <PackageVersion Include="Azure.Identity" Version="1.10.4" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.OpenApi" Version="1.6.11" />
+    <PackageVersion Include="Serilog" Version="3.1.1" />
+    <PackageVersion Include="Serilog.AspNetCore" Version="8.0.0" />
+    <PackageVersion Include="Serilog.Enrichers.AssemblyName" Version="1.0.9" />
+    <PackageVersion Include="Serilog.Enrichers.Context" Version="4.6.5" />
+    <PackageVersion Include="Serilog.Enrichers.Environment" Version="2.3.0" />
+    <PackageVersion Include="Serilog.Enrichers.Process" Version="2.0.2" />
+    <PackageVersion Include="Serilog.Enrichers.Thread" Version="3.1.0" />
+    <PackageVersion Include="Serilog.Sinks.Console" Version="5.0.1" />
+    <PackageVersion Include="Serilog.Sinks.EventLog" Version="3.1.0" />
+    <PackageVersion Include="Serilog.Sinks.Seq" Version="6.0.0" />
+    <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageVersion Include="Swashbuckle.AspNetCore.Annotations" Version="6.5.0" />
+    <PackageVersion Include="Swashbuckle.AspNetCore.Filters" Version="7.0.12" />
+  </ItemGroup>
 </Project>
