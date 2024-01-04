@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using WebScheduleGenerator.Core;
@@ -8,8 +9,11 @@ using WebScheduleGenerator.Init.Serialization;
 
 namespace WebScheduleGenerator.Init
 {
-	public class InitScheduleConverter(StopwatchContext stopwatchContext, ILogger<InitScheduleConverter> logger) : IScheduleConverter<InitTimetable>
+	public partial class InitScheduleConverter(StopwatchContext stopwatchContext, ILogger<InitScheduleConverter> logger) : IScheduleConverter<InitTimetable>
 	{
+		[GeneratedRegex(@"\(([^)]*)\)")]
+		private static partial Regex ParenthesesRegex();
+
 		public async Task<ProcessingResult> ConvertScheduleAsync(InitTimetable schedule, CancellationToken cancellationToken)
 		{
 			var timetables = new List<Timetable>();
@@ -66,6 +70,7 @@ namespace WebScheduleGenerator.Init
 			{
 				Id = stop.Id,
 				Name = dbStop?.Name ?? stop.Name,
+				Parentheses = GetParentheses(stop.Name),
 				SmsCode = dbStop?.SmsCode ?? stop.SmsCode,
 				Latitude = dbStop?.Latitude ?? -1d,
 				Longitude = dbStop?.Longitude ?? -1d,
@@ -157,19 +162,26 @@ namespace WebScheduleGenerator.Init
 
 		private async Task<ParentStop?> GetStopByIdOrDefaultAsync(string stopId, CancellationToken cancellationToken)
 		{
+			ParentStop? parentStop = null;
 			try
 			{
-				var result = await stopwatchContext
+				parentStop = await stopwatchContext
 					.ParentStops
-					.SingleOrDefaultAsync(parentStop => parentStop.Id.CompareTo(stopId) == 0, cancellationToken)
+					.SingleOrDefaultAsync(parentStop => Microsoft.EntityFrameworkCore.EF.Functions.Like(parentStop.Id, stopId), cancellationToken)
 					.ConfigureAwait(false);
-				return result;
 			}
 			catch (Exception ex)
 			{
 				logger.LogError(ex, "Failed to fetch stop {stopId}", stopId);
+				return null;
 			}
-			return null;
+
+			if (parentStop == null)
+			{
+				logger.LogWarning("Unable to fetch {stopId} from the database.", stopId);
+			}
+			return parentStop;
+
 		}
 
 		private static string GetAnchorFromSymbol(string symbol) => symbol switch
@@ -183,6 +195,7 @@ namespace WebScheduleGenerator.Init
 			"#" => "🞛",
 			_ => symbol,
 		};
-
+		private static string GetParentheses(string name) => ParenthesesRegex().Match(name).Groups[1].Value;
+		
 	}
 }
