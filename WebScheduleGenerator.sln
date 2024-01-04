@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34309.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{529CC562-91DD-4748-83A3-A1F53F621616}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		Directory.Packages.props = Directory.Packages.props
+		NuGet.config = NuGet.config
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebScheduleGenerator.Api", "Api\WebScheduleGenerator.Api.csproj", "{607D7F2F-C543-4C7E-8A25-7EC6C035845F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebScheduleGenerator.EF", "EF\WebScheduleGenerator.EF.csproj", "{C554BFDF-161C-4B09-9800-CAB99F1BB3CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebScheduleGenerator.Core", "Core\WebScheduleGenerator.Core.csproj", "{D534D810-2D68-4100-9AB7-4C528D95CE13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebScheduleGenerator.Init", "INIT\WebScheduleGenerator.Init.csproj", "{36535885-0F00-47AC-BBEC-1A6E632A1E41}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{607D7F2F-C543-4C7E-8A25-7EC6C035845F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{607D7F2F-C543-4C7E-8A25-7EC6C035845F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{607D7F2F-C543-4C7E-8A25-7EC6C035845F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{607D7F2F-C543-4C7E-8A25-7EC6C035845F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C554BFDF-161C-4B09-9800-CAB99F1BB3CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C554BFDF-161C-4B09-9800-CAB99F1BB3CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C554BFDF-161C-4B09-9800-CAB99F1BB3CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C554BFDF-161C-4B09-9800-CAB99F1BB3CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D534D810-2D68-4100-9AB7-4C528D95CE13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D534D810-2D68-4100-9AB7-4C528D95CE13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D534D810-2D68-4100-9AB7-4C528D95CE13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D534D810-2D68-4100-9AB7-4C528D95CE13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36535885-0F00-47AC-BBEC-1A6E632A1E41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36535885-0F00-47AC-BBEC-1A6E632A1E41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36535885-0F00-47AC-BBEC-1A6E632A1E41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36535885-0F00-47AC-BBEC-1A6E632A1E41}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {525CA558-E121-4F7A-A87F-C3FF366D36C1}
+	EndGlobalSection
+EndGlobal
