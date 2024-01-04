@@ -23,11 +23,6 @@ namespace WebScheduleGenerator.Init
 			return new ProcessingResult(timetables);
 		}
 
-		public Task<ProcessingResult> ConvertScheduleAsync(string schedule, CancellationToken cancellationToken)
-		{
-			var timetable = InitXmlParser.Deserialize(schedule);
-			return ConvertScheduleAsync(timetable, cancellationToken);
-		}
 		public Task<ProcessingResult> ConvertScheduleAsync(Stream schedule, CancellationToken cancellationToken)
 		{
 			var timetable = InitXmlParser.Deserialize(schedule);
