@@ -32,10 +32,14 @@ namespace WebScheduleGenerator.Api.Extensions
 			{
 				builder.Configuration.AddAzureKeyVault(keyVaultUri, new DefaultAzureCredential());
 			}
-			else
-			{
-				builder.Configuration.AddAzureKeyVault(keyVaultUri, new ManagedIdentityCredential());
-			}
+			// Enable this to deploy in Azure
+			//else
+			//{
+			//	builder.Configuration.AddAzureKeyVault(keyVaultUri, new ManagedIdentityCredential());
+			//}
+
+			var envPrefix = builder.Configuration.GetValue<string>("EnvPrefix") ?? throw new ArgumentException("EnvPrefix");
+			builder.Configuration.AddEnvironmentVariables(envPrefix);
 
 			builder.Services
 				.AddOptions<Security>()
