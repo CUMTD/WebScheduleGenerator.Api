@@ -10,6 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		Directory.Packages.props = Directory.Packages.props
 		NuGet.config = NuGet.config
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebScheduleGenerator.Api", "Api\WebScheduleGenerator.Api.csproj", "{607D7F2F-C543-4C7E-8A25-7EC6C035845F}"
