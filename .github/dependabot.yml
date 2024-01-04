@@ -28,7 +28,7 @@ updates:
           - 'Microsoft.EntityFrameworkCore*'
         update-types:
           - 'minor'
-       MS:
+      ms:
         patterns:
           - 'Microsoft.*'
         update-types:
