@@ -1,7 +1,5 @@
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebScheduleGenerator.Api.Errors;
-using WebScheduleGenerator.Api.Swagger.DocumentFilter;
 using WebScheduleGenerator.Core;
 using WebScheduleGenerator.Core.Entities.Schedule;
 using WebScheduleGenerator.Init.Serialization;

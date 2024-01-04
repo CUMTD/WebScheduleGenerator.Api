@@ -1,18 +1,16 @@
 using Azure.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using WebScheduleGenerator.Api.Config;
 using WebScheduleGenerator.Api.Filters;
+using WebScheduleGenerator.Api.Formatters;
 using WebScheduleGenerator.Api.Swagger.DocumentFilter;
 using WebScheduleGenerator.Core;
-using WebScheduleGenerator.Init;
-using Microsoft.EntityFrameworkCore;
 using WebScheduleGenerator.EF;
-using System.Data;
-using System.Data.Common;
+using WebScheduleGenerator.Init;
 using WebScheduleGenerator.Init.Serialization;
-using WebScheduleGenerator.Api.Formatters;
 
 namespace WebScheduleGenerator.Api.Extensions
 {
@@ -73,7 +71,7 @@ namespace WebScheduleGenerator.Api.Extensions
 		private static WebApplicationBuilder RegisterDependencyInjection(this WebApplicationBuilder builder)
 		{
 			_ = builder.Services.AddScoped<ApiKeyFilter>();
-			_ = builder.Services.AddScoped<IScheduleConverter<InitTimetable>, InitScheduleConverter> ();
+			_ = builder.Services.AddScoped<IScheduleConverter<InitTimetable>, InitScheduleConverter>();
 
 			return builder;
 		}
@@ -92,7 +90,8 @@ namespace WebScheduleGenerator.Api.Extensions
 
 			_ = builder
 				.Services
-				.AddControllers(options => {
+				.AddControllers(options =>
+				{
 					options.Filters.Add<ApiKeyFilter>();
 					options.InputFormatters.Add(new XmlInputFormatter<InitTimetable>());
 				});
@@ -132,7 +131,6 @@ namespace WebScheduleGenerator.Api.Extensions
 				{
 					options.DocumentFilter<HideVerbsFilter>();
 				}
-				options.OperationFilter<BodyParamFilter>();
 
 				var authMethodName = "API Key - Header";
 				var securityScheme = new OpenApiSecurityScheme

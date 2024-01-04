@@ -6,7 +6,7 @@ namespace WebScheduleGenerator.Api.Errors
 	/// </summary>
 	public sealed class NotFoundError : ApiError
 	{
-		
+
 		/// <inheritdoc />
 		/// <example>400</example>
 		public override int StatusCode => StatusCodes.Status400BadRequest;

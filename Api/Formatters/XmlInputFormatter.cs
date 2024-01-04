@@ -1,15 +1,13 @@
 using System.Text;
-using System.Xml;
 using System.Xml.Serialization;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
-using WebScheduleGenerator.Init.Serialization;
 
 namespace WebScheduleGenerator.Api.Formatters
 {
 	public class XmlInputFormatter<T> : TextInputFormatter where T : class
 	{
-		private static readonly  XmlSerializer Serializer = new(typeof(T));
+		private static readonly XmlSerializer Serializer = new(typeof(T));
 
 		public XmlInputFormatter()
 		{

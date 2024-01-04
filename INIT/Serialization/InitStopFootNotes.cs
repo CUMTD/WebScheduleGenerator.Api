@@ -10,7 +10,7 @@ namespace WebScheduleGenerator.Init.Serialization
 
 		public InitStopFootNotes()
 		{
-			Letters = new string[0];
+			Letters = [];
 		}
 	}
 }

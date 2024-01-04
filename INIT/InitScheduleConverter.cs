@@ -73,7 +73,7 @@ namespace WebScheduleGenerator.Init
 			};
 		}
 
-		private static Route RouteInfoToRoute(InitRoute route) => new Route
+		private static Route RouteInfoToRoute(InitRoute route) => new()
 		{
 			HexColor = route.RouteInfo.HexColor,
 			HexTextColor = route.RouteInfo.HexTextColor,
@@ -104,18 +104,12 @@ namespace WebScheduleGenerator.Init
 		{
 			var fns = direction?.Daytype?.AllFootnotes;
 
-			if (fns?.Footnotes?.Length > 0)
-			{
-				return fns
-					.Footnotes
-					.Select(fn => fn.Symbol)
-					.Select(s => SymbolToEntityFootnote(fns, s))
-					.Where(s => s != null)
-					.ToArray() as Footnote[];
-			}
-			return Enumerable
-				.Empty<Footnote>()
-				.ToArray();
+			return fns
+				?.Footnotes
+				?.Select(fn => fn.Symbol)
+				.Select(s => SymbolToEntityFootnote(fns, s))
+				.Where(s => s != null)
+				.ToArray() as Footnote[] ?? [];
 		}
 
 		private static Time TimeToEntityTime(InitAllFootnotes footnotes, InitTime time)
@@ -146,7 +140,7 @@ namespace WebScheduleGenerator.Init
 
 		private static Footnote? SymbolToEntityFootnote(InitAllFootnotes footnotes, string symbol)
 		{
-			var fn = footnotes.Footnotes.FirstOrDefault(s => s.Symbol == symbol);
+			var fn = footnotes?.Footnotes?.FirstOrDefault(s => s.Symbol == symbol);
 			if (fn != null)
 			{
 				var converted = ConvertSymbol(symbol);
