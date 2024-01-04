@@ -9,17 +9,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
 		Directory.Packages.props = Directory.Packages.props
+		LICENSE = LICENSE
 		NuGet.config = NuGet.config
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebScheduleGenerator.Api", "Api\WebScheduleGenerator.Api.csproj", "{607D7F2F-C543-4C7E-8A25-7EC6C035845F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebScheduleGenerator.Api", "Api\WebScheduleGenerator.Api.csproj", "{607D7F2F-C543-4C7E-8A25-7EC6C035845F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebScheduleGenerator.EF", "EF\WebScheduleGenerator.EF.csproj", "{C554BFDF-161C-4B09-9800-CAB99F1BB3CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebScheduleGenerator.EF", "EF\WebScheduleGenerator.EF.csproj", "{C554BFDF-161C-4B09-9800-CAB99F1BB3CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebScheduleGenerator.Core", "Core\WebScheduleGenerator.Core.csproj", "{D534D810-2D68-4100-9AB7-4C528D95CE13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebScheduleGenerator.Core", "Core\WebScheduleGenerator.Core.csproj", "{D534D810-2D68-4100-9AB7-4C528D95CE13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebScheduleGenerator.Init", "INIT\WebScheduleGenerator.Init.csproj", "{36535885-0F00-47AC-BBEC-1A6E632A1E41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebScheduleGenerator.Init", "INIT\WebScheduleGenerator.Init.csproj", "{36535885-0F00-47AC-BBEC-1A6E632A1E41}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{F08625EE-A63D-4DFA-ACB1-354F257847F7}"
 	ProjectSection(SolutionItems) = preProject
