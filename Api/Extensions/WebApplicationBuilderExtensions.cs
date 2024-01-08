@@ -4,7 +4,6 @@ using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using WebScheduleGenerator.Api.Config;
-using WebScheduleGenerator.Api.Filters;
 using WebScheduleGenerator.Api.Formatters;
 using WebScheduleGenerator.Api.Swagger.DocumentFilter;
 using WebScheduleGenerator.Core;
@@ -41,11 +40,6 @@ namespace WebScheduleGenerator.Api.Extensions
 			var envPrefix = builder.Configuration.GetValue<string>("EnvPrefix") ?? throw new ArgumentException("EnvPrefix");
 			builder.Configuration.AddEnvironmentVariables(envPrefix);
 
-			builder.Services
-				.AddOptions<Security>()
-				.BindConfiguration("Security")
-				.ValidateDataAnnotations()
-				.ValidateOnStart();
 
 			builder.Services
 				.AddOptions<Cors>()
@@ -74,7 +68,6 @@ namespace WebScheduleGenerator.Api.Extensions
 
 		private static WebApplicationBuilder RegisterDependencyInjection(this WebApplicationBuilder builder)
 		{
-			_ = builder.Services.AddScoped<ApiKeyFilter>();
 			_ = builder.Services.AddScoped<IScheduleConverter<InitTimetable>, InitScheduleConverter>();
 
 			return builder;
@@ -96,7 +89,6 @@ namespace WebScheduleGenerator.Api.Extensions
 				.Services
 				.AddControllers(options =>
 				{
-					options.Filters.Add<ApiKeyFilter>();
 					options.InputFormatters.Add(new XmlInputFormatter<InitTimetable>());
 				});
 
@@ -136,24 +128,7 @@ namespace WebScheduleGenerator.Api.Extensions
 					options.DocumentFilter<HideVerbsFilter>();
 				}
 
-				var authMethodName = "API Key - Header";
-				var securityScheme = new OpenApiSecurityScheme
-				{
-					Reference = new OpenApiReference
-					{
-						Type = ReferenceType.SecurityScheme,
-						Id = authMethodName
-					},
-					Description = "Provide your API key in the header using X-ApiKey.",
-					In = ParameterLocation.Header,
-					Name = "X-ApiKey",
-					Type = SecuritySchemeType.ApiKey,
-					Scheme = "Bearer"
-				};
-				options.AddSecurityDefinition(authMethodName, securityScheme);
-				options.AddSecurityRequirement(new OpenApiSecurityRequirement() {
-					{ securityScheme, Array.Empty <string>() }
-				  });
+
 
 			});
 
