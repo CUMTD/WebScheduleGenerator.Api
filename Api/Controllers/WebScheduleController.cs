@@ -11,10 +11,10 @@ namespace WebScheduleGenerator.Api.Controllers
 	public class WebScheduleController(IScheduleConverter<InitTimetable> scheduleConverter, ILogger<WebScheduleController> logger) : ControllerBase
 	{
 		[HttpPost, HttpOptions, HttpHead, Consumes("multipart/form-data"), Route("file")]
-		[ProducesResponseType(typeof(ProcessingResult), StatusCodes.Status200OK, contentType: "application/json")]
-		[ProducesResponseType(typeof(UnauthorizedError), StatusCodes.Status401Unauthorized, contentType: "application/json")]
-		[ProducesResponseType(typeof(BadRequestError), StatusCodes.Status400BadRequest, contentType: "application/json")]
-		[ProducesResponseType(typeof(ServerError), StatusCodes.Status500InternalServerError, contentType: "application/json")]
+		[ProducesResponseType<ProcessingResult>(StatusCodes.Status200OK, "application/json")]
+		[ProducesResponseType<UnauthorizedError>(StatusCodes.Status401Unauthorized, "application/json")]
+		[ProducesResponseType<BadRequestError>(StatusCodes.Status400BadRequest, "application/json")]
+		[ProducesResponseType<ServerError>(StatusCodes.Status500InternalServerError, "application/json")]
 		public async Task<IActionResult> ProcessXml(IFormFile file, CancellationToken cancellationToken)
 		{
 			if (file == null || file.Length == 0)
