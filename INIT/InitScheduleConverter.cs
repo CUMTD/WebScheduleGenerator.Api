@@ -91,18 +91,24 @@ namespace WebScheduleGenerator.Init
 
 			foreach (var sj in direction.Daytype.ServiceJournies)
 			{
-				var column = new Row();
+				var times = new List<Time>();
 				foreach (var sjt in sj.Times)
 				{
 					var time = TimeToEntityTime(direction.Daytype.AllFootnotes, sjt);
-					column.Times.Add(time);
+					times.Add(time);
 				}
-				columns.Add(column);
+
+				if (times.Any(t => !string.IsNullOrWhiteSpace(t.Text) || t.Footnotes?.Length > 0 || t.IsDashed))
+				{
+					columns.Add(Row.Create(times));
+				}
+				else
+				{
+					columns.Add(Row.CreateEmpty());
+				}
 			}
 
-			return columns
-				.Where(c => c.Times.Any(t => !string.IsNullOrEmpty(t.Text)))
-				.ToArray();
+			return [.. columns];
 		}
 
 		private static Footnote[] DirectionToFootnotes(InitDirection direction)
