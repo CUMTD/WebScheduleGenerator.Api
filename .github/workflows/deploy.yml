@@ -3,8 +3,7 @@ name: Build and deploy .NET Core application to Web App web-schedule-generator
 on:
   workflow_dispatch:
   push:
-    branches:
-	  branches: [ "main" ]
+    branches: [ "main" ]
 
 env:
   AZURE_WEBAPP_NAME: web-schedule-generator
