@@ -1,27 +1,26 @@
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace WebScheduleGenerator.Api.Swagger.DocumentFilter
+namespace WebScheduleGenerator.Api.Swagger.DocumentFilter;
+
+internal class HideVerbsFilter : IDocumentFilter
 {
-	internal class HideVerbsFilter : IDocumentFilter
+	private readonly OperationType[] _operationTypesToRemove;
+
+	public HideVerbsFilter()
 	{
-		private readonly OperationType[] _operationTypesToRemove;
+		_operationTypesToRemove = [OperationType.Options, OperationType.Head];
+	}
 
-		public HideVerbsFilter()
+	public void Apply(OpenApiDocument swaggerDoc, DocumentFilterContext context)
+	{
+		foreach (var path in swaggerDoc.Paths.Values)
 		{
-			_operationTypesToRemove = [OperationType.Options, OperationType.Head];
-		}
-
-		public void Apply(OpenApiDocument swaggerDoc, DocumentFilterContext context)
-		{
-			foreach (var path in swaggerDoc.Paths.Values)
+			foreach (var operationType in _operationTypesToRemove)
 			{
-				foreach (var operationType in _operationTypesToRemove)
+				if (path.Operations.ContainsKey(operationType))
 				{
-					if (path.Operations.ContainsKey(operationType))
-					{
-						_ = path.Operations.Remove(operationType);
-					}
+					_ = path.Operations.Remove(operationType);
 				}
 			}
 		}

@@ -1,21 +1,20 @@
-namespace WebScheduleGenerator.Api.Errors
+namespace WebScheduleGenerator.Api.Error;
+
+/// <summary>
+/// Indicates an API error.
+/// </summary>
+public abstract class ApiError
 {
 	/// <summary>
-	/// Indicates an API error.
+	/// The HTTP status code for this response.
 	/// </summary>
-	public abstract class ApiError
-	{
-		/// <summary>
-		/// The HTTP status code for this response.
-		/// </summary>
-		/// <example>401</example>
+	/// <example>401</example>
 
-		public abstract int StatusCode { get; }
+	public abstract int StatusCode { get; }
 
-		/// <summary>
-		/// A message explaining the error.
-		/// </summary>
-		/// <example>You must provide an API key</example>
-		public virtual string Message { get; set; } = default!;
-	}
+	/// <summary>
+	/// A message explaining the error.
+	/// </summary>
+	/// <example>You must provide an API key</example>
+	public virtual string Message { get; set; } = default!;
 }
