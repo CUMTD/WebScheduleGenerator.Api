@@ -1,15 +1,12 @@
 using System.Text.RegularExpressions;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using WebScheduleGenerator.Core;
 using WebScheduleGenerator.Core.Entities.Schedule;
-using WebScheduleGenerator.Core.Entities.Stopwatch;
-using WebScheduleGenerator.EF;
 using WebScheduleGenerator.Init.Serialization;
 
 namespace WebScheduleGenerator.Init
 {
-	public partial class InitScheduleConverter(StopwatchContext stopwatchContext, ILogger<InitScheduleConverter> logger) : IScheduleConverter<InitTimetable>
+	public partial class InitScheduleConverter(ILogger<InitScheduleConverter> logger) : IScheduleConverter<InitTimetable>
 	{
 		[GeneratedRegex(@"\(([^)]*)\)")]
 		private static partial Regex ParenthesesRegex();
@@ -48,35 +45,27 @@ namespace WebScheduleGenerator.Init
 			};
 		}
 
-		private async Task<Core.Entities.Schedule.Stop[]> DirectionToStops(InitDirection direction, CancellationToken cancellationToken)
+		private async Task<Stop[]> DirectionToStops(InitDirection direction, CancellationToken cancellationToken)
 		{
-			var stops = new List<Core.Entities.Schedule.Stop>();
+			var stops = new List<Stop>();
 			foreach (var stop in direction.Daytype.Stops)
 			{
-				var converted = await StopToEntityStop(stop, cancellationToken)
-					.ConfigureAwait(false);
+				var converted = StopToEntityStop(stop, cancellationToken);
 
 				stops.Add(converted);
 			}
 			return [.. stops];
 		}
 
-		private async Task<Core.Entities.Schedule.Stop> StopToEntityStop(InitStop stop, CancellationToken cancellationToken)
+		private Stop StopToEntityStop(InitStop stop, CancellationToken cancellationToken) => new Stop
 		{
-			var dbStop = await GetStopByIdOrDefaultAsync(stop.Id, cancellationToken)
-				.ConfigureAwait(false);
-
-			return new Core.Entities.Schedule.Stop
-			{
-				Id = stop.Id,
-				Name = dbStop?.Name ?? stop.Name,
-				Parentheses = GetParentheses(stop.Name),
-				SmsCode = dbStop?.SmsCode ?? stop.SmsCode,
-				Latitude = dbStop?.Latitude ?? -1d,
-				Longitude = dbStop?.Longitude ?? -1d,
-				TimePointLetter = stop.TimePointLetter
-			};
-		}
+			Id = stop.Id,
+			// remove  eveything in parentheses from the name
+			Name = ParenthesesRegex().Replace(stop.Name, string.Empty).Trim(),
+			Parentheses = GetParentheses(stop.Name),
+			SmsCode = stop.SmsCode,
+			TimePointLetter = stop.TimePointLetter
+		};
 
 		private static Route RouteInfoToRoute(InitRoute route) => new()
 		{
@@ -166,29 +155,6 @@ namespace WebScheduleGenerator.Init
 			return null;
 		}
 
-		private async Task<ParentStop?> GetStopByIdOrDefaultAsync(string stopId, CancellationToken cancellationToken)
-		{
-			ParentStop? parentStop = null;
-			try
-			{
-				parentStop = await stopwatchContext
-					.ParentStops
-					.SingleOrDefaultAsync(parentStop => Microsoft.EntityFrameworkCore.EF.Functions.Like(parentStop.Id, stopId), cancellationToken)
-					.ConfigureAwait(false);
-			}
-			catch (Exception ex)
-			{
-				logger.LogError(ex, "Failed to fetch stop {stopId}", stopId);
-				return null;
-			}
-
-			if (parentStop == null)
-			{
-				logger.LogWarning("Unable to fetch {stopId} from the database.", stopId);
-			}
-			return parentStop;
-
-		}
 
 		private static string GetAnchorFromSymbol(string symbol) => symbol switch
 		{
@@ -202,6 +168,6 @@ namespace WebScheduleGenerator.Init
 			_ => symbol,
 		};
 		private static string GetParentheses(string name) => ParenthesesRegex().Match(name).Groups[1].Value;
-		
+
 	}
 }

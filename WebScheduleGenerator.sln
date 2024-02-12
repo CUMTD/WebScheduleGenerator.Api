@@ -16,8 +16,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebScheduleGenerator.Api", "Api\WebScheduleGenerator.Api.csproj", "{607D7F2F-C543-4C7E-8A25-7EC6C035845F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebScheduleGenerator.EF", "EF\WebScheduleGenerator.EF.csproj", "{C554BFDF-161C-4B09-9800-CAB99F1BB3CE}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebScheduleGenerator.Core", "Core\WebScheduleGenerator.Core.csproj", "{D534D810-2D68-4100-9AB7-4C528D95CE13}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebScheduleGenerator.Init", "INIT\WebScheduleGenerator.Init.csproj", "{36535885-0F00-47AC-BBEC-1A6E632A1E41}"
@@ -43,10 +41,6 @@ Global
 		{607D7F2F-C543-4C7E-8A25-7EC6C035845F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{607D7F2F-C543-4C7E-8A25-7EC6C035845F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{607D7F2F-C543-4C7E-8A25-7EC6C035845F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C554BFDF-161C-4B09-9800-CAB99F1BB3CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C554BFDF-161C-4B09-9800-CAB99F1BB3CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C554BFDF-161C-4B09-9800-CAB99F1BB3CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C554BFDF-161C-4B09-9800-CAB99F1BB3CE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D534D810-2D68-4100-9AB7-4C528D95CE13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D534D810-2D68-4100-9AB7-4C528D95CE13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D534D810-2D68-4100-9AB7-4C528D95CE13}.Release|Any CPU.ActiveCfg = Release|Any CPU

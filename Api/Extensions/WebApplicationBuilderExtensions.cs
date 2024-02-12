@@ -1,5 +1,4 @@
 using Azure.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Serilog;
@@ -7,7 +6,6 @@ using WebScheduleGenerator.Api.Config;
 using WebScheduleGenerator.Api.Formatters;
 using WebScheduleGenerator.Api.Swagger.DocumentFilter;
 using WebScheduleGenerator.Core;
-using WebScheduleGenerator.EF;
 using WebScheduleGenerator.Init;
 using WebScheduleGenerator.Init.Serialization;
 
@@ -17,7 +15,6 @@ namespace WebScheduleGenerator.Api.Extensions
 	{
 		public static WebApplicationBuilder Configure(this WebApplicationBuilder builder) => builder
 				.AddConfiguration()
-				.RegisterEF()
 				.RegisterDependencyInjection()
 				.ConfigureLogging()
 				.ConfigureApi();
@@ -50,21 +47,6 @@ namespace WebScheduleGenerator.Api.Extensions
 			return builder;
 		}
 
-		private static WebApplicationBuilder RegisterEF(this WebApplicationBuilder builder)
-		{
-			var connectionString = builder.Configuration.GetConnectionString("Stopwatch");
-
-			_ = builder.Services.AddDbContextPool<StopwatchContext>(options => options
-				.UseSqlServer(
-					connectionString,
-					sqlOptions =>
-						sqlOptions.CommandTimeout((int)TimeSpan.FromSeconds(30).TotalSeconds)
-						.EnableRetryOnFailure(1)
-				)
-			);
-
-			return builder;
-		}
 
 		private static WebApplicationBuilder RegisterDependencyInjection(this WebApplicationBuilder builder)
 		{
