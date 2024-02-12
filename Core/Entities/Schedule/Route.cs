@@ -1,9 +1,8 @@
-namespace WebScheduleGenerator.Core.Entities.Schedule
+namespace WebScheduleGenerator.Core.Entities.Schedule;
+
+public class Route
 {
-	public class Route
-	{
-		public required string Name { get; set; }
-		public required string HexColor { get; set; }
-		public required string HexTextColor { get; set; }
-	}
+	public required string Name { get; set; }
+	public required string HexColor { get; set; }
+	public required string HexTextColor { get; set; }
 }

@@ -1,10 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace WebScheduleGenerator.Api.Config
+namespace WebScheduleGenerator.Api.Config;
+
+internal class Cors
 {
-	internal class Cors
-	{
-		[Required]
-		public string PolicyName { get; set; } = default!;
-	}
+	[Required]
+	public string PolicyName { get; set; } = default!;
 }
