@@ -12,7 +12,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Core\WebScheduleGenerator.Core.csproj" />
-		<ProjectReference Include="..\EF\WebScheduleGenerator.EF.csproj" />
 	</ItemGroup>
 
 </Project>

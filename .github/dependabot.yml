@@ -22,12 +22,6 @@ updates:
     commit-message:
       prefix: '⬆️ '
     groups:
-      ef:
-        patterns:
-          - 'Microsoft.EntityFrameworkCore'
-          - 'Microsoft.EntityFrameworkCore*'
-        update-types:
-          - 'minor'
       ms:
         patterns:
           - 'Microsoft.*'
