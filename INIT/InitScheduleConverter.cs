@@ -1,27 +1,25 @@
 using System.Text.RegularExpressions;
-using Microsoft.Extensions.Logging;
 using WebScheduleGenerator.Core;
 using WebScheduleGenerator.Core.Entities.Schedule;
 using WebScheduleGenerator.Init.Serialization;
 
 namespace WebScheduleGenerator.Init
 {
-	public partial class InitScheduleConverter(ILogger<InitScheduleConverter> logger) : IScheduleConverter<InitTimetable>
+	public partial class InitScheduleConverter() : IScheduleConverter<InitTimetable>
 	{
 		[GeneratedRegex(@"\(([^)]*)\)")]
 		private static partial Regex ParenthesesRegex();
 
-		public async Task<ProcessingResult> ConvertScheduleAsync(InitTimetable schedule, CancellationToken cancellationToken)
+		public Task<ProcessingResult> ConvertScheduleAsync(InitTimetable schedule, CancellationToken cancellationToken)
 		{
 			var timetables = new List<Timetable>();
 			foreach (var direction in schedule.Route.Directions)
 			{
-				var converted = await DirectionToTimetable(schedule, direction, cancellationToken)
-					.ConfigureAwait(false);
+				var converted = DirectionToTimetable(schedule, direction, cancellationToken);
 				timetables.Add(converted);
 			}
 
-			return new ProcessingResult(timetables);
+			return Task.FromResult(new ProcessingResult(timetables));
 		}
 
 		public Task<ProcessingResult> ConvertScheduleAsync(Stream schedule, CancellationToken cancellationToken)
@@ -30,10 +28,9 @@ namespace WebScheduleGenerator.Init
 			return ConvertScheduleAsync(timetable, cancellationToken);
 		}
 
-		private async Task<Timetable> DirectionToTimetable(InitTimetable timetable, InitDirection direction, CancellationToken cancellationToken)
+		private Timetable DirectionToTimetable(InitTimetable timetable, InitDirection direction, CancellationToken cancellationToken)
 		{
-			var stops = await DirectionToStops(direction, cancellationToken)
-				.ConfigureAwait(false);
+			var stops = DirectionToStops(direction, cancellationToken);
 
 			return new Timetable()
 			{
@@ -45,7 +42,7 @@ namespace WebScheduleGenerator.Init
 			};
 		}
 
-		private async Task<Stop[]> DirectionToStops(InitDirection direction, CancellationToken cancellationToken)
+		private Stop[] DirectionToStops(InitDirection direction, CancellationToken cancellationToken)
 		{
 			var stops = new List<Stop>();
 			foreach (var stop in direction.Daytype.Stops)
@@ -57,7 +54,7 @@ namespace WebScheduleGenerator.Init
 			return [.. stops];
 		}
 
-		private Stop StopToEntityStop(InitStop stop, CancellationToken cancellationToken) => new Stop
+		private Stop StopToEntityStop(InitStop stop, CancellationToken cancellationToken) => new()
 		{
 			Id = stop.Id,
 			// remove  eveything in parentheses from the name

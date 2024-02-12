@@ -26,7 +26,7 @@ namespace WebScheduleGenerator.Api.Extensions
 
 			if (builder.Environment.IsDevelopment())
 			{
-				builder.Configuration.AddAzureKeyVault(keyVaultUri, new DefaultAzureCredential());
+				_ = builder.Configuration.AddAzureKeyVault(keyVaultUri, new DefaultAzureCredential());
 			}
 			// Enable this to deploy in Azure
 			//else
@@ -35,10 +35,10 @@ namespace WebScheduleGenerator.Api.Extensions
 			//}
 
 			var envPrefix = builder.Configuration.GetValue<string>("EnvPrefix") ?? throw new ArgumentException("EnvPrefix");
-			builder.Configuration.AddEnvironmentVariables(envPrefix);
+			_ = builder.Configuration.AddEnvironmentVariables(envPrefix);
 
 
-			builder.Services
+			_ = builder.Services
 				.AddOptions<Cors>()
 				.BindConfiguration("Cors")
 				.ValidateDataAnnotations()
@@ -56,7 +56,7 @@ namespace WebScheduleGenerator.Api.Extensions
 		}
 		private static WebApplicationBuilder ConfigureLogging(this WebApplicationBuilder builder)
 		{
-			builder
+			_ = builder
 				.Host
 				.UseSerilog((context, loggerConfig) => loggerConfig.ReadFrom.Configuration(context.Configuration));
 
@@ -69,10 +69,7 @@ namespace WebScheduleGenerator.Api.Extensions
 
 			_ = builder
 				.Services
-				.AddControllers(options =>
-				{
-					options.InputFormatters.Add(new XmlInputFormatter<InitTimetable>());
-				});
+				.AddControllers(options => options.InputFormatters.Add(new XmlInputFormatter<InitTimetable>()));
 
 			_ = builder.Services.AddRouting(options =>
 			{
